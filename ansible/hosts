@@ -20,3 +20,19 @@ ansible-demo ansible_host=35.195.31.194
 #ansible all -m ping -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 #ansible all -a "ps aux" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 #ansible all -m ping -u cjog --sudo
+
+#ansible atlanta -a "/sbin/reboot" -f 10
+#ansible atlanta -m copy -a "src=/etc/hosts dest=/tmp/hosts"
+#ansible webservers -m file -a "dest=/srv/foo/b.txt mode=600 owner=mdehaan group=mdehaan"
+#ansible webservers -m file -a "dest=/path/to/c state=absent"
+#ansible webservers -m yum -a "name=acme state=present"
+
+#ansible ansible-demo -m apt -a "name=acme state=present"
+#ansible ansible-demo -m apt -a "name=acme state=present" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+
+#ansible ansible-demo -m file -a "dest=/tmp/hosts state=touch" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#ansible ansible-demo -m file -a "src=/Users/cjog/projects/ops-spikes/ansible/hosts dest=/tmp/hosts state=file" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#ansible ansible-demo -m copy -a "src=/Users/cjog/projects/ops-spikes/ansible/hosts dest=/tmp/hosts" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#ansible ansible-demo -m shell -a 'cat /tmp/hosts' -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+
+#gcs ansible-demo --zone europe-west1-c
