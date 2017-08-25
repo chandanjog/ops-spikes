@@ -1,0 +1,22 @@
+#-i <path>
+#104.197.235.97
+localhost              ansible_connection=local
+
+#http://docs.ansible.com/ansible/latest/intro_inventory.html
+#badwolf.example.com:5309
+#jumper ansible_port=5555 ansible_host=192.0.2.50
+
+#[webservers]
+#www[01:50].example.com
+
+#[targets]
+#localhost              ansible_connection=local
+#other1.example.com     ansible_connection=ssh        ansible_user=mpdehaan
+#other2.example.com     ansible_connection=ssh        ansible_user=mdehaan
+
+[test]
+ansible-demo ansible_host=35.195.31.194
+
+#ansible all -m ping -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#ansible all -a "ps aux" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#ansible all -m ping -u cjog --sudo
