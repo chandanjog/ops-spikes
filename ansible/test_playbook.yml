@@ -6,6 +6,3 @@
       ping:
     - name: list all users
       shell: cat /etc/passwd
-      register: all_users_result
-    - debug:
-        var: all_users_result.stdout_lines
