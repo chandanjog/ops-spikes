@@ -36,3 +36,5 @@ ansible-demo ansible_host=35.195.31.194
 #ansible ansible-demo -m shell -a 'cat /tmp/hosts' -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 
 #gcs ansible-demo --zone europe-west1-c
+
+#ansible-playbook ansible/test_playbook -i ansible/hosts --key-file ~/.ssh/google_compute_engine
