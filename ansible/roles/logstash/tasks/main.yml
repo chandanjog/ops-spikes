@@ -1,4 +1,6 @@
 ---
+# https://www.digitalocean.com/community/questions/logstash-grok-pattern-for-nginx-log-from-sysylog
+# https://www.digitalocean.com/community/tutorials/how-to-map-user-location-with-geoip-and-elk-elasticsearch-logstash-and-kibana
 #
 # Installing logstash
 #
@@ -34,7 +36,7 @@
 # Configure Beats input configuration 02-beats-input.conf
 - name: Configure Beats configuration file
   template:
-    src=beats-input.conf.j2
+    src=syslog-input.conf.j2
     dest=/etc/logstash/conf.d/02-beats-input.conf
     owner=root
     group=root
@@ -61,7 +63,19 @@
     name: logstash
     state: started
     daemon_reload: yes
+# Read permission for syslog file
+# - name: read permission syslog
+#   file:
+#     path=/var/log/syslog
+#     group=logstash
+#     mode=644
+- name: logstash user to adm group
+  become: yes
+  become_user: root
+  shell: usermod -a -G adm logstash
 # Enable Logstash service
+# - name: Sleep for sometime, waiting for ES to start
+#   shell: sleep 10
 - name: Enable Logstash service
   systemd:
     name: logstash
