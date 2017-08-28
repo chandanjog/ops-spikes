@@ -6,3 +6,5 @@
       ping:
     - name: list all users
       shell: cat /etc/passwd
+    # - name: Test gce moudle
+    #   gce:

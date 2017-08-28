@@ -1,0 +1,29 @@
+---
+#
+# Installing Java 8
+#
+# Add the Java ppa repository
+- name: Add Java repository
+  # shell:
+  #   echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+  #   echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+  #   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+  #   apt-get update
+  #   apt-get install oracle-java8-installer
+  # become: root
+  apt_repository:
+    repo: ppa:webupd8team/java
+# Automatically accepts the Oracle License popup in the terminal
+- name: Automatically select the Oracle License
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+# Install Java 8
+- name: fix update_cache issue
+  become: yes
+  become_user: root
+  file: path=/var/lib/apt/lists/* state=absent
+    # rm -vf /var/lib/apt/lists/*
+- name: Install the Java 8 package
+  apt:
+    name: oracle-java8-installer
+    state: present
+    # update_cache: yes

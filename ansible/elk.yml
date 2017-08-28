@@ -1,0 +1,15 @@
+---
+#
+# Playbook to install the ELK stack
+# https://qbox.io/blog/deploying-elk-stack-ansible-elasticsearch-kibana-logstash
+#
+- hosts: elk
+  remote_user: cjog
+  become: yes
+  become_user: root
+  roles:
+    - { role: java }
+    - { role: elasticsearch }
+    - { role: kibana }
+    - { role: nginx }
+    - { role: logstash }

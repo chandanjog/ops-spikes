@@ -1,0 +1,41 @@
+---
+#
+# Installing Kibana
+#
+# Add Kibana APT-repository
+# - name: Adding Kibana APT repository
+#   apt_repository:
+#     repo: deb http://packages.elastic.co/kib... stable main
+#     state: present
+- name: Install Kibana
+  become: yes
+  become_user: root
+  shell: |
+    wget https://artifacts.elastic.co/downloads/kibana/kibana-5.5.2-amd64.deb
+    sha1sum kibana-5.5.2-amd64.deb
+    sudo dpkg -i kibana-5.5.2-amd64.deb
+  register: install_kibana
+- debug: var=install_kibana.stdout_lines
+
+# Install Kibana
+# - name: Update repositories cache and install Kibana
+#   apt:
+#     name: kibana
+#     update_cache: yes
+# Update kibana config file to only accept local connections
+- name: Updating the config file to restrict outside access
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: 'server.host:'
+    line: 'server.host: localhost'
+# Enable Kibana service
+- name: Enabling Kibana service
+  systemd:
+    name: kibana
+    enabled: yes
+    daemon_reload: yes
+# Start Kibana service
+- name: Starting Kibana service
+  systemd:
+    name: kibana
+    state: started

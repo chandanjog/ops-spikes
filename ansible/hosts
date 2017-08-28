@@ -15,7 +15,10 @@ localhost              ansible_connection=local
 #other2.example.com     ansible_connection=ssh        ansible_user=mdehaan
 
 [test]
-ansible-demo ansible_host=35.195.31.194
+ansible-demo-elk ansible_host=35.184.201.78
+
+[elk]
+elk-demo-elk ansible_host=35.184.201.78
 
 #ansible all -m ping -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 #ansible all -a "ps aux" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
@@ -38,3 +41,7 @@ ansible-demo ansible_host=35.195.31.194
 #gcs ansible-demo --zone europe-west1-c
 
 #ansible-playbook ansible/test_playbook -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#sudo find /usr -type f -name "gce*" -ls
+#https://www.npmjs.com/package/gce-inventory
+
+#ansible-playbook -i hosts install/elk.yml -i ansible/hosts --key-file ~/.ssh/google_compute_engine
