@@ -1,7 +1,9 @@
 ---
 # https://www.digitalocean.com/community/questions/logstash-grok-pattern-for-nginx-log-from-sysylog
 # https://www.digitalocean.com/community/tutorials/how-to-map-user-location-with-geoip-and-elk-elasticsearch-logstash-and-kibana
-#
+# For cleaning indexes: https://www.elastic.co/guide/en/elasticsearch/client/curator/current/examples.html
+# https://galaxy.ansible.com/geerlingguy/logstash-forwarder/
+
 # Installing logstash
 #
 # Add Logstash APT repository
@@ -80,3 +82,20 @@
   systemd:
     name: logstash
     enabled: yes
+
+#https://www.digitalocean.com/community/tutorials/how-to-centralize-logs-with-rsyslog-logstash-and-elasticsearch-on-ubuntu-14-04
+- name: Configure rsyslog to accept on tcp/udp ports
+  lineinfile:
+    dest: /etc/rsyslog.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '#module(load="imudp")', line: 'module(load="imudp")' }
+    - { regexp: '#input(type="imudp" port="514")', line: 'input(type="imudp" port="514")' }
+    - { regexp: '#module(load="imtcp")', line: 'module(load="imtcp")' }
+    - { regexp: '#input(type="imtcp" port="514")', line: 'input(type="imtcp" port="514")' }
+
+- name: Restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted
