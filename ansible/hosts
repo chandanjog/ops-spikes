@@ -47,3 +47,4 @@ elk-demo-elk ansible_host=35.184.201.78
 #ansible-playbook -i hosts ansible/elk.yml -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 #curl http://localhost:9200/_cat/indices
 #curl -X DELETE http://localhost:9200/*metadata*
+#https://discuss.elastic.co/t/problem-converting-latitude-and-longitude-into-a-geo-point-for-kibana/52856/12

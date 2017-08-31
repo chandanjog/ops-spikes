@@ -16,6 +16,12 @@ filter {
 
     geoip {
       source => "clientip"
+      target => "geoip"
+      add_field => [ "[geoip_coordinates]", "%{[geoip][longitude]}" ]
+      add_field => [ "[geoip_coordinates]", "%{[geoip][latitude]}"  ]
+    }
+    mutate {
+      convert => [ "[geoip_coordinates]", "float"]
     }
 
     useragent {

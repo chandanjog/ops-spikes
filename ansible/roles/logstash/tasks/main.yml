@@ -59,6 +59,23 @@
     owner=root
     group=root
     mode=0644
+
+# Setup ES template for logstash to work with geo-point
+- name: ES logstash mapping template folder
+  file:
+    path: /etc/logstash/templates
+    state: directory
+- name: Setup ES logstash mapping template
+  template:
+    src=logstash-elasticsearch-mapping.j2
+    dest=/etc/logstash/templates/logstash-elasticsearch.json
+    owner=root
+    group=root
+    mode=0644
+- name: ES logstash template setup
+  shell: 'curl -X PUT -d@/etc/logstash/templates/logstash-elasticsearch.json -H "Content-Type: application/json" http://localhost:9200/_template/logstash'
+
+
 # Start Logstash service
 - name: Start Logstash service
   systemd:

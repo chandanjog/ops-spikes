@@ -1,0 +1,13 @@
+{
+  "template" : "logstash-*",
+  "settings" : {
+    "index.refresh_interval" : "5s"
+  },
+  "mappings": {
+      "logs": {
+        "properties" : {
+  	      "geoip_coordinates" : { "type": "geo_point" }
+        }
+      }
+    }
+}
