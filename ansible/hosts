@@ -45,3 +45,5 @@ elk-demo-elk ansible_host=35.184.201.78
 #https://www.npmjs.com/package/gce-inventory
 
 #ansible-playbook -i hosts ansible/elk.yml -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#curl http://localhost:9200/_cat/indices
+#curl -X DELETE http://localhost:9200/*metadata*
