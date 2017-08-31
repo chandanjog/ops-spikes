@@ -44,4 +44,4 @@ elk-demo-elk ansible_host=35.184.201.78
 #sudo find /usr -type f -name "gce*" -ls
 #https://www.npmjs.com/package/gce-inventory
 
-#ansible-playbook -i hosts install/elk.yml -i ansible/hosts --key-file ~/.ssh/google_compute_engine
+#ansible-playbook -i hosts ansible/elk.yml -i ansible/hosts --key-file ~/.ssh/google_compute_engine
