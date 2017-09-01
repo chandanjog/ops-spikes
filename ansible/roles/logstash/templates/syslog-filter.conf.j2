@@ -37,36 +37,20 @@ filter {
       }
     }
 
-    json{
+    json {
         source => "json_string"
         target => "parsed_json"
-        remove_field=>["json_string"]
     }
 
     json{
-        source => "parsed_json"
+        source => "%{[parsed_json][message]}"
         target => "parsed_json_message"
     }
 
     mutate {
       add_field => [ "log_type", "rails" ]
       add_field => [ "json_string", "parsed_json" ]
-      add_field => {
-        "timestamp" => "%{[parsed_json][timestamp]}"
-        "level" => "%{[parsed_json][level]}"
-        "message" => "%{[parsed_json][message]}"
-
-        "method" => "%{[parsed_json_message][method]}"
-        "path" => "%{[parsed_json_message][path]}"
-        "controller" => "%{[parsed_json_message][controller]}"
-        "action" => "%{[parsed_json_message][action]}"
-        "status" => "%{[parsed_json_message][status]}"
-        "duration" => "%{[parsed_json_message][duration]}"
-        "ip" => "%{[parsed_json_message][ip]}"
-        "session_id" => "%{[parsed_json_message][session_id]}"
-        "user_id" => "%{[parsed_json_message][user_id]}"
-        "organization_id" => "%{[parsed_json_message][organization_id]}"
-      }
+      remove_field=>["json_string"]
     }
   }
 
