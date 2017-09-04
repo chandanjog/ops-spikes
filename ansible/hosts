@@ -20,6 +20,23 @@ ansible-demo-elk ansible_host=35.184.201.78
 [elk]
 elk-demo-elk ansible_host=35.184.201.78
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #ansible all -m ping -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 #ansible all -a "ps aux" -i ansible/hosts --key-file ~/.ssh/google_compute_engine
 #ansible all -m ping -u cjog --sudo

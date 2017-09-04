@@ -35,13 +35,14 @@ filter {
   if [message] =~ ".*website_production.*" {
     grok {
       match => {
-        "message" => '.* %{GREEDYDATA:orignal_host} .*website_production .*"method":"%{DATA:method}".*"path":"%{DATA:path}".*"controller":"%{DATA:controller}".*"action":"%{DATA:action}".*"status":%{DATA:status},.*"duration":%{DATA:duration},.*"view":%{DATA:view}.*"ip":"%{DATA:ip}".*"session_id":%{DATA:session_id},.*"user_id":%{DATA:user_id},.*"organization_id":%{DATA:organization_id}}'
+        "message" => '.* %{GREEDYDATA:_host} .*website_production .*"method":"%{DATA:method}".*"controller":"%{DATA:controller}".*"action":"%{DATA:action}".*"status":%{DATA:status},.*"duration":%{DATA:duration},.*"view":%{DATA:view}.*"location":"%{DATA:location}".*"ip":"%{DATA:ip}".*"session_id":%{DATA:session_id},.*"user_id":%{DATA:user_id},.*"organization_id":%{DATA:organization_id}}'
       }
     }
 
     mutate {
       add_field => [ "log_type", "rails" ]
-      add_field => [ "orignal_host", "%{orignal_host}" ]
+      add_field => [ "_host", "%{_host}" ]
+      gsub => ["session_id", "\"", ""]
       gsub => ["user_id", "\"", ""]
       gsub => ["organization_id", "\"", ""]
     }
