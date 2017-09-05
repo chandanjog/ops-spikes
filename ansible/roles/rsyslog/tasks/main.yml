@@ -1,0 +1,11 @@
+- name: Setup remote rsyslog servers to send data to central rsyslog server feeding into logstash
+  template:
+    src=rsyslog.conf.j2
+    dest=/etc/rsyslog.conf
+    owner=root
+    group=root
+    mode=0644
+- name: Restart Rsyslog service
+  service:
+    name: rsyslog
+    state: restarted

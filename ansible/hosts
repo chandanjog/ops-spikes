@@ -14,15 +14,16 @@ localhost              ansible_connection=local
 #other1.example.com     ansible_connection=ssh        ansible_user=mpdehaan
 #other2.example.com     ansible_connection=ssh        ansible_user=mdehaan
 
-[test]
+[elk]
 ansible-demo-elk ansible_host=35.184.201.78
 
-[elk]
-elk-demo-elk ansible_host=35.184.201.78
-
-
-
-
+[cloud66-prod-nodes]
+c66open-layer-apipanther    ansible_host=104.196.19.208
+#c66open-layerbulldog-yby    ansible_host=35.185.71.173
+c66open-layerchubbyboy-gws  ansible_host=35.196.151.142
+c66open-layerfatboy-dxh     ansible_host=35.185.3.77
+c66open-layerimpala-xam     ansible_host=104.196.217.100
+c66open-layerworkhorse-bso  ansible_host=35.185.19.193
 
 
 

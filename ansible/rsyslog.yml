@@ -1,0 +1,10 @@
+---
+#
+# Playbook to setup rsylog feedint to ELK server
+#
+- hosts: cloud66-prod-nodes
+  remote_user: cjog
+  become: yes
+  become_user: root
+  roles:
+    - { role: rsyslog }
